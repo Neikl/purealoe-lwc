@@ -18,7 +18,7 @@ node {
         checkout scm
     }
     	stage('Authenticate Devhub') {
-            rc = sh returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile "/home/osboxes/Nekl/JWT/server.key" --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
+            rc = sh returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile "/home/osboxes/Nekl/JWT/server.key" --setdefaultdevhubusername --instanceurl ${SFDC_HOST} && echo "force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile "/home/osboxes/Nekl/JWT/server.key" --setdefaultdevhubusername --instanceurl ${SFDC_HOST}" "
             if (rc != 0) { error 'hub org authorization failed' }
         }
         
