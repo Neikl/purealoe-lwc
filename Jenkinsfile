@@ -25,7 +25,7 @@ node {
         
         stage('Create Scratch Org') {
             // need to pull out assigned username
-            rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:org:create -f config/project-scratch-def.json --json -s -a dev"
+            rmsg = sh returnStdout: true, sfdx force:org:create -f config/project-scratch-def.json --json -s -a dev"
             println(rmsg)
             def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(rmsg)
