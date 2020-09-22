@@ -18,7 +18,9 @@ node {
         checkout scm
     }
     	stage('Authenticate Devhub') {
-            sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile "/home/osboxes/Nekl/JWT/server.key" --setdefaultdevhubusername --instanceurl ${SFDC_HOST} "
+            sh "sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3CEdo_aSlqljtoudIMupWRZtPIMQW0DWSef2Yf96lnmE_42pkK_2djCL_Sn4JZr7evz2_CL \
+--jwtkeyfile /home/osboxes/Nekl/JWT/server.key --username neil-provar-test@sonata-software.com \
+--setdefaultdevhubusername --setalias myhuborg"
         }
         
         stage('Create Scratch Org') {
