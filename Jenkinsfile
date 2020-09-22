@@ -18,14 +18,14 @@ node {
         checkout scm
     }
     	stage('Authenticate Devhub') {
-            sh "sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3CEdo_aSlqljtoudIMupWRZtPIMQW0DWSef2Yf96lnmE_42pkK_2djCL_Sn4JZr7evz2_CL \
---jwtkeyfile /home/osboxes/Nekl/JWT/server.key --username neil-provar-test@sonata-software.com \
+            sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
+--jwtkeyfile /home/osboxes/Nekl/JWT/server.key --username ${HUB_ORG} \
 --setdefaultdevhubusername --setalias myhuborg"
         }
         
         stage('Create Scratch Org') {
             // need to pull out assigned username
-            rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:org:create -f config/developerOrg-scratch-def.json --json -s -a df13@makepositive.com"
+            rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:org:create -f config/project-scratch-def.json --json -s -a dev"
             println(rmsg)
             def jsonSlurper = new JsonSlurperClassic()
             def robj = jsonSlurper.parseText(rmsg)
