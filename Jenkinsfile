@@ -18,7 +18,7 @@ node {
         checkout scm
     }
     	stage('Authenticate Devhub') {
-            sh "sfdx force:auth:logout --targetusername %USERNAME% -p & sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
+            sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
 --jwtkeyfile /usr/JWT_salesforce/JWT/old/server.key --username ${HUB_ORG} \
 --setdefaultdevhubusername --setalias myhuborg"
         }
