@@ -48,4 +48,12 @@ node {
             if (robj.status != 0) { error 'password generation failed: ' + robj.message }
             robj = null
         }
+	
+        stage('Push To Test Org') {
+            rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
+            if (rc != 0) { error 'Push failed'}	
+            // assign permset
+            rc = sh returnStatus: true, script: "\"${toolbelt}\" force:user:permset:assign --targetusername ${SFDC_USERNAME} --permsetname purealoe"
+            if (rc != 0) { error 'permset:assign failed'}
+        }
 }
