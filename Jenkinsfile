@@ -6,10 +6,10 @@ node {
     def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
     def SFDC_USERNAME
 
-    def HUB_ORG="neil.lohit@sonata-software.com"
+    def HUB_ORG="neil-provar-test@sonata-software.com"
     def SFDC_HOST = "https://login.salesforce.com"
     def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY="3MVG9n_HvETGhr3DySO6mrYFt7w.WztmP9q4mLCK.WSa0VzfQYpxpwAsepaKcjUPG3hPxq5z6IRqNiAt2otjJ"
+    def CONNECTED_APP_CONSUMER_KEY="3MVG9n_HvETGhr3CEdo_aSlqljtoudIMupWRZtPIMQW0DWSef2Yf96lnmE_42pkK_2djCL_Sn4JZr7evz2_CL"
 
     def toolbelt = tool 'toolbelt'
 
@@ -18,8 +18,8 @@ node {
         checkout scm
     }
     	stage('Authenticate Devhub') {
-            sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
---jwtkeyfile /usr/JWT_salesforce/JWT/server.key --username ${HUB_ORG} \
+            sh "sfdx force:auth:logout --targetusername %USERNAME% -p & sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
+--jwtkeyfile /usr/JWT_salesforce/JWT/old/server.key --username ${HUB_ORG} \
 --setdefaultdevhubusername --setalias myhuborg"
         }
         
