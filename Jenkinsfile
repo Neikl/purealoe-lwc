@@ -19,7 +19,7 @@ node {
     }
     	stage('Authenticate Devhub') {
             sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
---jwtkeyfile /home/osboxes/Nekl/JWT/server.key --username ${HUB_ORG} \
+--jwtkeyfile /usr/JWT_salesforce/JWT/Nekl/JWT/server.key --username ${HUB_ORG} \
 --setdefaultdevhubusername --setalias myhuborg"
         }
         
