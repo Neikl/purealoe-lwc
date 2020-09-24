@@ -13,7 +13,7 @@ node {
 
     def toolbelt = tool 'toolbelt'
 
-    stage('checkout source') {
+    stage('Checkout Source') {
         // when running in multi-branch job, one must issue this command
         checkout scm
     }
@@ -35,7 +35,7 @@ node {
             robj = null
         }
 
-    	stage('Set Default scratch org') {
+    	stage('Set Default Scratch Org') {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:config:set --global defaultusername=${SFDC_USERNAME} --json"
             if (rc != 0) { error 'Default scratch org failed' }
         }
@@ -74,7 +74,7 @@ node {
             }
         }
 
-        stage('collect results') {
+        stage('Collect Results') {
             junit keepLongStdio: true, testResults: 'tests/**/*-junit.xml'
         }
 	
