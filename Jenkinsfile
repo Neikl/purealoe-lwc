@@ -25,6 +25,27 @@ node {
         
         stage('Create Scratch Org') {
             // need to pull out assigned username
-            sh "sfdx force:org:create -f config/project-scratch-def.json -a DevUbuntu"
+            rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:org:create -f config/project-scratch-def.json --json -s -a QAUbuntu"
+            println(rmsg)
+            def jsonSlurper = new JsonSlurperClassic()
+            def robj = jsonSlurper.parseText(rmsg)
+            if (robj.status != 0) { error 'org creation failed: ' + robj.message }
+            SFDC_USERNAME=robj.result.username
+            println(SFDC_USERNAME)
+            robj = null
+        }
+
+    	stage('Set Default scratch org') {
+            rc = sh returnStatus: true, script: "\"${toolbelt}\" force:config:set --global defaultusername=${SFDC_USERNAME} --json"
+            if (rc != 0) { error 'Default scratch org failed' }
+        }
+
+        stage('Create password for scratch org') {
+ 			rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:user:password:generate --json"
+			println(rmsg)
+			def jsonSlurper = new JsonSlurperClassic()
+			def robj = jsonSlurper.parseText(rmsg)
+            if (robj.status != 0) { error 'password generation failed: ' + robj.message }
+            robj = null
         }
 }
