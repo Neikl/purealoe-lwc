@@ -6,10 +6,10 @@ node {
     def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
     def SFDC_USERNAME
 
-    def HUB_ORG="neil-provar-test@sonata-software.com"
+    def HUB_ORG="neil.lohit@sonata-software.com"
     def SFDC_HOST = "https://login.salesforce.com"
     def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY="3MVG9n_HvETGhr3CEdo_aSlqljtoudIMupWRZtPIMQW0DWSef2Yf96lnmE_42pkK_2djCL_Sn4JZr7evz2_CL"
+    def CONNECTED_APP_CONSUMER_KEY="3MVG9n_HvETGhr3DySO6mrYFt7w.WztmP9q4mLCK.WSa0VzfQYpxpwAsepaKcjUPG3hPxq5z6IRqNiAt2otjJ"
 
     def toolbelt = tool 'toolbelt'
 
@@ -25,6 +25,6 @@ node {
         
         stage('Create Scratch Org') {
             // need to pull out assigned username
-            sh "sfdx force:org:create -f config/project-scratch-def.json -a dev"
+            sh "sfdx force:org:create -f config/project-scratch-def.json -a DevUbuntu"
         }
 }
