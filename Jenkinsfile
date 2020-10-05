@@ -78,9 +78,9 @@ node {
             junit keepLongStdio: true, testResults: 'tests/**/*-junit.xml'
         }
 	
-        //stage('Chatter Notifier'){
-           //steps{
-               //chatterPost body: "This is a Chatter post from a pipeline! ${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME}", credentialsId: 'team.sfdc.user1'
-                 //}
-	//}
+        stage('Chatter Notifier'){
+           steps{
+               chatterPost body: "This is a Chatter post from a pipeline! ${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME}", credentialsId: 'team.sfdc.user1'
+                 }
+	}
 }
