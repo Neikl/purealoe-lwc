@@ -19,17 +19,12 @@ node {
     }
 	
  stage('Souce Code Analysis'){
-
- steps{
-
+	 
  sh "sonar-scanner \
   -Dsonar.projectKey=salesforce-DX \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://192.168.0.146:9000 \
   -Dsonar.login=a1e738c7b01ce1df11e6cf8e31308ac4b1287f32"
-
- }
-
  }
 	
     	stage('Authenticate Devhub') {
