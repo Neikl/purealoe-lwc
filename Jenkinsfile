@@ -56,13 +56,6 @@ node {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:user:permset:assign --targetusername ${SFDC_USERNAME} --permsetname purealoe"
             if (rc != 0) { error 'permset:assign failed'}
         }
-	
-        /*stage('Run Provar test cases') {
-	    	println(SFDC_USERNAME)
-	    	rmsg = bat returnStdout: true, script: "ant -f webinar/ANT/build.xml -DSFDC_USERNAME_SO=${SFDC_USERNAME}"
-	        println(rmsg)
-		println()
-	    }*/
 
         stage('Run Apex Test') {
             sh "mkdir -p ${RUN_ARTIFACT_DIR}"
@@ -74,6 +67,13 @@ node {
             }
         }
 
+        stage('Run Provar test cases') {
+	    	//println(SFDC_USERNAME)
+	    	//rmsg = bat returnStdout: true, script: "ant -f webinar/ANT/build.xml -DSFDC_USERNAME_SO=${SFDC_USERNAME}"
+	        //println(rmsg)
+		println()
+	    }
+	
         stage('Collect Results') {
             junit keepLongStdio: true, testResults: 'tests/**/*-junit.xml'
         }
