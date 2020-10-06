@@ -49,6 +49,16 @@ node {
             robj = null
         }
 	
+        stage('Souce Code Analysis'){
+        steps{
+               sh "sonar-scanner \
+               -Dsonar.projectKey=salesforce-demo \
+               -Dsonar.sources=. \
+               -Dsonar.host.url=http://192.168.0.146:9000 \
+               -Dsonar.login=a1e738c7b01ce1df11e6cf8e31308ac4b1287f32"
+             }
+        }	
+	
         stage('Push To Test Org') {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
             if (rc != 0) { error 'Push failed'}	
