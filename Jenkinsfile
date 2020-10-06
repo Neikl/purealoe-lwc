@@ -17,6 +17,21 @@ node {
         // when running in multi-branch job, one must issue this command
         checkout scm
     }
+	
+ stage('Souce Code Analysis'){
+
+ steps{
+
+ sh "sonar-scanner \
+  -Dsonar.projectKey=salesforce-DX \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://192.168.0.146:9000 \
+  -Dsonar.login=a1e738c7b01ce1df11e6cf8e31308ac4b1287f32"
+
+ }
+
+ }
+	
     	stage('Authenticate Devhub') {
             sh "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} \
 --jwtkeyfile /usr/JWT_salesforce/JWT/old/server.key --username ${HUB_ORG} \
@@ -48,20 +63,6 @@ node {
             if (robj.status != 0) { error 'password generation failed: ' + robj.message }
             robj = null
         }*/
-	
- stage('Souce Code Analysis'){
-
- steps{
-
- sh "sonar-scanner \
-  -Dsonar.projectKey=salesforce-DX \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://192.168.0.146:9000 \
-  -Dsonar.login=a1e738c7b01ce1df11e6cf8e31308ac4b1287f32"
-
- }
-
- }
 	
         stage('Push To Test Org') {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
