@@ -33,7 +33,7 @@ node {
 --setdefaultdevhubusername --setalias myhuborg"
         }
         
-        /*stage('Create Scratch Org') {
+        stage('Create Scratch Org') {
             // need to pull out assigned username
             rmsg = sh returnStdout: true, script: "\"${toolbelt}\" force:org:create -f config/project-scratch-def.json --json -s -a QAUbuntu"
             println(rmsg)
@@ -57,7 +57,7 @@ node {
 			def robj = jsonSlurper.parseText(rmsg)
             if (robj.status != 0) { error 'password generation failed: ' + robj.message }
             robj = null
-        }*/
+        }
 	
         stage('Push To Test Org') {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
