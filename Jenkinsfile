@@ -59,7 +59,7 @@ node {
             robj = null
         }
 	
-        stage('Push To Test Org') {
+        stage('Push To Scratch Org') {
             rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
             if (rc != 0) { error 'Push failed'}	
             // assign permset
