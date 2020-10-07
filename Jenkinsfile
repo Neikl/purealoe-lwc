@@ -84,9 +84,9 @@ node {
 		println()
 	    }
 	
-        stage('Collect Results') {
-            junit keepLongStdio: true, testResults: 'tests/**/*-junit.xml'
-        }*/
+        stage('Collect Results') {/*
+            //junit keepLongStdio: true, testResults: 'tests/**/*-junit.xml'
+        //}
 	
         /*stage('Chatter Notifier'){
            steps{
