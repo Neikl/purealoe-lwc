@@ -11,6 +11,6 @@ node {
   -Dsonar.projectKey=sonar-confluence-integration \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://192.168.0.103:9000 \
-  -Dsonar.login=3319447c65d21d9aaa9f7ed1023fc226492d6462
+  -Dsonar.login=3319447c65d21d9aaa9f7ed1023fc226492d6462"
     }
 }
