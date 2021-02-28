@@ -1,5 +1,4 @@
 #!groovy
-import groovy.json.JsonSlurperClassic
 node {
     stage('Checkout Source') {
         // when running in multi-branch job, one must issue this command
